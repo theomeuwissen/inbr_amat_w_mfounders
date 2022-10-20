@@ -68,6 +68,25 @@ close(fil)
 ## fastA22mf.jl: calculates A-relationship matrix incl metafounders for list of animals (lst22) faster than A22mf.jl
 Usage: fastA22(ped,lst22,GAMMA,f)
 f is (n-Nmf)x1 vector of inbreeding coefficients (input; may be calculated by ML1992MF.jl).
+Writes: fastA22mf.mat file which contains the lower triangle elements (double-precision) of the A22 matrix.
+The elements can be read in Julia into a vector a22 by:
+
+
+```
+a22=zeros(N22*(N22+1)/2)  #no_elements equals size_of_file fastA22.mat in bytes divided by 8  
+
+fil=open("fastA22mf.mat")
+
+a22=read!(fil,a22)
+
+close(fil)
+```
+
+
+
+## fastA22.jl: calculates A-relationship matrix for list of animals (lst22) faster than A22.jl
+Usage: fastA22(ped,lst22,f)
+f is (nx1) vector of inbreeding coefficients (input; may be calculated by ML1992.jl).
 Writes: fastA22.mat file which contains the lower triangle elements (double-precision) of the A22 matrix.
 The elements can be read in Julia into a vector a22 by:
 
@@ -81,6 +100,7 @@ a22=read!(fil,a22)
 
 close(fil)
 ```
+
 
 
 
