@@ -134,7 +134,7 @@ Usage: gamma=gammhat(G,Q)
 where: G is nxn (genomic) relationship-matrix or A22 matrix
 Q = (nxNmf) matrix of genetic contribution of Nmf metafounders to n animals
 
-Model used: G = Q*GAMMA*Q' + E  
+Model used: G = Q * GAMMA * Q' + E  
 
 The data-matrix G is vectorised and the unknowns (GAMMA) are also vectorised to yield a usual least squares model. 
 
@@ -144,10 +144,12 @@ the estimation is by the statistical model: y = X*b +e
 where y = data vector of the elements of G (lower triangle is used)  
        b = data vector of the estimates of GAMMA (lower triangle)  
        X_1 = row 1 of the coefficient matrix  
-belonging to  GAM11   GAM21      GAM22   GAM31     GAM32     GAM33   GAM41    ....  
+belonging to:
+```
+              GAM11   GAM21      GAM22   GAM31     GAM32     GAM33   GAM41    ....  
        X_1   =[Q11^2  2*Q12*Q11  Q12^2  2*Q13*Q11  2*Q13*Q12 Q13^2   2*Q14*Q11 ...  
        X_2   =[Q11Q21 (Q12Q21+   Q12Q22 (Q13Q21+   (Q13Q22+  Q13Q23  (Q14Q21+  
                        Q22Q11)           Q23Q11)    Q23Q12)           Q24Q11)  
-
+```
 
 
