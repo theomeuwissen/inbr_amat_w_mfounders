@@ -153,3 +153,17 @@ belonging to:
 ```
 
 
+
+## upg_relations.jl : estimates relationships between unknown parent groups (GAMMA)
+ usage: (GAMMA,F)=upg_relations(PED3,Nupg)   
+ Nupg=number of UPGs  
+ PED3(1:n,1:3)  contains:  
+ for row 1,..,Nupg : all (integer) elements are 0  
+ for the real animals row Nupg+1,..,n: a renumbered pedigree with row i:  SIREi DAMi UPGi  
+ if SIREi is unknown use UPG_of_sire; same for DAMi; if UPGi is unknown: use 0   
+ pedigree is renumbered consecutivel for animals: Nupg+1,Nupg+2,...,n    (renumbered from old to young animals)   
+ NOTE: UPGs are also renumbered consecutively: 1,..,Nupg   
+ Estimation of diagonals of GAMMA: 2*F(animals_in_same_UPG)   
+ Offdiagonals of GAMMA: GAMMA(i,j)=min(GAMMA(i,i),GAMMA(j,j))   (following Aguilar & Misztal, 2008).   
+ uses: include("ML1992MF.jl") (to calculate F); using Statistics
+ 
