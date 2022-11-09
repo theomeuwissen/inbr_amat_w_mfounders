@@ -127,12 +127,28 @@ Output: AI_mf.mat is sparse lower triangle of A-inverse including metafounder pa
 
 
 
-## gammahat.jl: estimates gamma matrix of metafounder relationships
+## sigmahat.jl: estimates sigma matrix of Masuda (2021)
 
-Usage: gamma=gammhat(G,Q)
+Usage: sigma=sigmahat(G,Q,thinning)   
 
-where: G is nxn (genomic) relationship-matrix or A22 matrix
-Q = (nxNmf) matrix of genetic contribution of Nmf metafounders to n animals
+ following Masuda et al. (2021) and references therein:  
+  A* = A + Q*SIGMA*Q'   
+  A* = ped relationships incl groups (usually A22 matrix)   
+ Q = (nxNmf) group contribution matrix   
+ A = ped relationships without groups (usually A22 matrix)      
+ sigmahat estimates SIGMA given a general relationship matrix G (or A)    
+
+I.e. the same model can be applied to the genomic relationship matrix G (we assume genomic relationships include groups resulting in SIGMA_G)
+    
+ We can then extend Vitezica et al. (2011) to a model with groups:   
+ Gadjust = G + Q*(SIGMA_A - SIGMA_G)*Q'   
+    
+    
+thinning= 10: an integer indicating that every 10th element of G is to be used for the estimation of GAMMA (saves time)    
+        =0 means use all elements  of G    
+    
+    
+   
 
 Model used: G = Q * GAMMA * Q' + E  
 
