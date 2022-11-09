@@ -40,7 +40,9 @@ thinning=max(1,Int(thinning))
 
 # set up normal equations XX and Xy
 l=0; k=0
-for i=1:size(Q,1), j=1:i  #loop over data-points
+for i=1:size(Q,1)
+iprint=1
+for j=1:i  #loop over data-points
   k+=1
   if(k%thinning==0)
     l+=1
@@ -54,18 +56,24 @@ for i=1:size(Q,1), j=1:i  #loop over data-points
             X[l,ll]=Q[i,ii]*Q[j,jj]+Q[j,ii]*Q[i,jj]
        end    
     end
-    if(l==10000)||(i==j==N)  #X is full or done
+    if(l==10000)   #||(i==j==N)  #X is full or done
 #      println(X[1:l,1:Neq])
 #      println(y[1:l])
       XX+=X[1:l,1:Neq]'*X[1:l,1:Neq]
       Xy+=X[1:l,1:Neq]'y[1:l]
       l=0; 
     end
-    if(i%10000==0)&&(i==j)
-      println(" relationships of animal ",i)
+    if(i%10000==0)&&(iprint==1)
+      println(" relationships of animal ",i); iprint=0
     end
-  end  
+  end  #thinning
 end
+end
+if(l>0)  #add last records
+      XX+=X[1:l,1:Neq]'*X[1:l,1:Neq]
+      Xy+=X[1:l,1:Neq]'y[1:l]
+end
+
 
 #solve equations
 bhat=XX\Xy
