@@ -76,12 +76,18 @@ end
 
 
 #solve equations
-bhat=XX\Xy
+#bhat=XX\Xy   #often many singularities
+# use eigen-decomposition of XX=>  E*V*E'*bhat=Xy => bhat=E*V^-1*E'*Xy (use only first k-components of decomposition)
+# use SVD for eigendecomposition of symmetric matrix
+(E,V,Et)=svd(XX)
+k=count(V.>1.0e-6)
+bhat=E[:,1:k] * diagm(1 ./V[1:k]) * Et[:,1:k]'
+
 l=0
 for i=1:Nmf, j=1:i
   l+=1
   SIGMA[i,j]=SIGMA[j,i]=bhat[l]
 end
 
-return SIGMA
+return XX,Xy,SIGMA
 end #function

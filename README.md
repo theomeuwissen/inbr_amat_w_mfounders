@@ -17,6 +17,21 @@ Before running the routines use the LinearAlgebra package:
 using LinearAlgebra, SparseArrays
 
 
+## renum_ped.jl: renumbers pedigree
+ usage: ped = renum_ped(PED)   
+input:   
+ PED (input) contains 3 columns: ID SIRE DAM (sorted from old to young, i.e. sires/dams come before offspring)   
+ SIRE == 0 or not in ID column: implies missing SIRE (if SIRE not in ID column but not 0: SIREid is treated as group)   
+output:   
+ ped (output) = 2 column integer matrix of renumbered IDs (sire and dam) (new IDs equal row number and are thus omitted)    
+                in case of groups: first Ngroup IDs belong to groups and have "0 0" parents; followed by animalIDs who may have parent/group IDs (>0)   
+ irenum = vector of original IDs (row-numbers refer to original IDs)   
+                in case of groups: the first Ngroup IDs are groups    
+
+
+
+
+
 ## ML1992.jl: calculates Inbreeding coefficients.
 Usage:  F = ML1992(ped)  
 i.e. F is returned which is a vector of inbreeding coefficients
