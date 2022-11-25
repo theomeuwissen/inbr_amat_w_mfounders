@@ -30,7 +30,7 @@ groups=Dict{Int,Any}() #opposite keypairing to find group-IDs back
 n=0  #number of animals
 m=0  #number of groups (negative number and starts at 0)
 for i=1:N
- if(length(select)>0)&&(PED[i,1] in select)
+ if(length(select)==0)||(PED[i,1] in select)
   if !(haskey(list,PED[i,2]))
      list[PED[i,2]]=m
      groups[m]=PED[i,2];  m-=1
@@ -43,6 +43,7 @@ for i=1:N
   list[PED[i,1]]=n
  end 
 end
+
 
 ntot=length(list)
 if(m==-1) #actually no groups

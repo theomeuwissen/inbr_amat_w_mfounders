@@ -199,4 +199,12 @@ belonging to:
  Estimation of diagonals of GAMMA: 2*F(animals_in_same_UPG)   
  Offdiagonals of GAMMA: GAMMA(i,j)=min(GAMMA(i,i),GAMMA(j,j))   (following Aguilar & Misztal, 2008).   
  uses: include("ML1992MF.jl") (to calculate F); using Statistics
- 
+
+##  Atimesx.jl: calculates A*x without setting up A (algorithm by Colleau et al (2002))
+ usage s=Atimesx(x,ped,F)   
+ x=vector of reals   
+ ped = pedigree (2 column: column of sires; column of dams); 0 = missing parents   
+ F is vector of inbreeding coefficients   
+   unknown Ax = A*x= (I-L)^-1 *D* (I-L')^-1 *x    
+
+ output : vector of A*x   
