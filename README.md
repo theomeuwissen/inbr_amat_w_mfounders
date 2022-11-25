@@ -18,10 +18,12 @@ using LinearAlgebra, SparseArrays
 
 
 ## renum_ped.jl: renumbers pedigree
- usage: ped = renum_ped(PED)   
+ usage: (ped, irenum) = renum_ped(PED,select)   
 input:   
  PED (input) contains 3 columns: ID SIRE DAM (sorted from old to young, i.e. sires/dams come before offspring)   
  SIRE == 0 or not in ID column: implies missing SIRE (if SIRE not in ID column but not 0: SIREid is treated as group)   
+ select: (vector) selects set of animals from pedigree (includes their ancestors); select=[] selects all IDs  
+   
 output:   
  ped (output) = 2 column integer matrix of renumbered IDs (sire and dam) (new IDs equal row number and are thus omitted)    
                 in case of groups: first Ngroup IDs belong to groups and have "0 0" parents; followed by animalIDs who may have parent/group IDs (>0)   
