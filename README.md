@@ -210,15 +210,18 @@ belonging to:
  output : vector of A*x
 
 
-## impute_parents: randomly imputes missing parents from their UPG group
+## impute_parents.jl : randomly imputes missing parents from their UPG group
 usage PED = impute_parents(ped)    
 
- ped = 3 column pedigree: sire dam UPG    
+ ped = 4 column pedigree: sire dam sex UPG
+ IDs => 1,2,3,4,..  (0 for base-generation parent)
+ sex = 1 or 2
  UPG = Unknown Parent Group = coded as negative integer ID-numbers (or 0 if unknown)   
  Unknown parents in columns 1 and 2 can be identified by their UPG-id (or 0 if true founder animals)   
  impute_parents(): for any missing parent randomly select a parent from the same UPG   
  Note: by having different UPGs for males/sires and females/dams we can avoid that a male is used as dam or vice versa.   
 
- output: PED is pedigree where true unknown parents (indicated 0) remain unknown but all other parents are randomly imputed from their UPG
+ output: PED is pedigree where true unknown parents (indicated 0; incl. parents for which there were no UPG reference animal) remain unknown.
+ Other unknown-parents are randomly imputed from candidates from their UPG
 
 
