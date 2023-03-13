@@ -16,9 +16,9 @@ function impute_parents(ped)
 PED=deepcopy(ped)
 
 #set up lists of members UPG
-Nupg=-findmin(ped[:,3])[1]
-upg_members=Vector{Vector{Int64}}(undef,Nupg,2)  #Vector of vectors
-for i=1:Nupg, for j=1:2
+Nupg=-findmin(ped[:,4])[1]
+upg_members=Array{Vector{Int64},2}(undef,Nupg,2)  #Vector of vectors
+for i=1:Nupg, j=1:2
   upg_members[i,j]=Int[]
 end
 
@@ -38,7 +38,6 @@ for i=1:size(ped,1)
     n=length(upg_members[iupg,j])
     if(n>0)
       is=upg_members[iupg,j][rand(1:n)]
-     end	
     else
       is=0
     end
